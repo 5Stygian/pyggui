@@ -57,7 +57,7 @@ class Colors:
             a (int): alpha.
         
         Returns:
-            rgb (tuple[int, int, int, int]): (r, g, b, a)
+            rgba (tuple[int, int, int, int]): (r, g, b, a)
         """
         
         if type(r) != int:
