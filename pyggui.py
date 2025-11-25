@@ -14,7 +14,7 @@ class Rect(pygame.sprite.Sprite):
         background (tuple[int]): An  color value.
     """
     
-    def __init__(self, screen: pygame.Surface, left: int, top: int, width: int, height: int, background: tuple[int]):
+    def __init__(self, screen: pygame.Surface, left: int, top: int, width: int, height: int, background: tuple[int, int, int]|pygame.color.Color):
         """
         Class constructor.
         
@@ -24,10 +24,10 @@ class Rect(pygame.sprite.Sprite):
             top (int): The y coord of the top left corner of the sprite.
             width (int): The width of the sprite.
             height (int): The height of the sprite.
-            background (tuple[int]): An  color value.
+            background (tuple[int, int, int]|pygame.color.Color): A color value.
         """
 
-        super().__init__()
+        pygame.sprite.Sprite.__init__(self)
 
         self.screen = screen
 
@@ -53,12 +53,12 @@ class Menu(Rect):
     The base class for pyggui objects.
     
     Attributes:
-        sprites (list): A list of all child sprites of the object.
-        buttons (list[Menu.Button]): A list of all child buttons of the object.
+        sprites (pygame.sprite.Group): A group of all child sprites of the object.
+        buttons (pygame.sprite.Group): A group of all child buttons of the object.
 
         screen (pygame.Surface): A pygame.Surface object.
         
-        background (tuple[int]): An  color value.
+        background (tuple[int, int, int]|pygame.color.Color): A color value.
     """
 
     def __init__(self, *args):
@@ -74,13 +74,13 @@ class Menu(Rect):
             width (int): The width of the sprite.
             height (int): The height of the sprite.
 
-            background (tuple[int]): An  color value.
+            background (tuple[int, int, int]|pygame.color.Color): A color value.
         """
 
         super().__init__(*args)
 
-        self.sprites: list = []
-        self.buttons: list[Menu.Button] = []
+        self.sprites: pygame.sprite.Group = pygame.sprite.Group()
+        self.buttons: pygame.sprite.Group = pygame.sprite.Group()
 
     def draw(self):
         """Draws all child sprites."""
@@ -129,7 +129,7 @@ class Menu(Rect):
                 width (int): The width of the sprite.
                 height (int): The height of the sprite.
                 
-                background (tuple[int]): An  color value.
+                background (tuple[int, int, int]|pygame.color.Color): A color value.
             """
 
             super().__init__(*args)
@@ -145,8 +145,8 @@ class Menu(Rect):
             self.rect.x = self.parent.rect.left + self.rect.left
             self.rect.y = self.parent.rect.top + self.rect.top
 
-            self.parent.sprites.append(self)
-            self.parent.buttons.append(self)
+            self.parent.sprites.add(self)
+            self.parent.buttons.add(self)
 
         def centerToParent(self) -> None:
             """Center the object to the parents centerx"""
