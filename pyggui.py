@@ -13,9 +13,9 @@ class Colors:
     Subclasses:
         CSS3: A dataclass containing all CSS3 colors.
     """
-    
+
     @staticmethod
-    def rgb(r: int, g: int, b: int) -> tuple[int, int, int]:
+    def rgb(r: int, g: int, b: int) -> pygame.Color:
         """
         Syntactic sugar.
 
@@ -25,7 +25,7 @@ class Colors:
             b (int): Blue.
         
         Returns:
-            rgb (tuple[int, int, int]): (r, g, b)
+            rgb (pygame.Color): (r, g, b)
         """
         
         if type(r) != int:
@@ -43,10 +43,10 @@ class Colors:
         if b < 0 or b > 255:
             raise ValueError(f"b should be in range 0 - 255, not {b}")
 
-        return (r, g, b)
+        return pygame.Color(r, g, b)
     
     @staticmethod
-    def rgba(r: int, g: int, b: int, a: int) -> tuple[int, int, int, int]:
+    def rgba(r: int, g: int, b: int, a: int) -> pygame.Color:
         """
         Syntactic sugar.
 
@@ -54,10 +54,10 @@ class Colors:
             r (int): Red.
             g (int): Green.
             b (int): Blue.
-            a (int): alpha.
+            a (int): Alpha.
         
         Returns:
-            rgba (tuple[int, int, int, int]): (r, g, b, a)
+            rgba (pygame.Color): (r, g, b, a=a)
         """
         
         if type(r) != int:
@@ -80,7 +80,7 @@ class Colors:
         if a < 0 or a > 255:
             raise ValueError(f"a should be in range 0 - 255, not {a}")
 
-        return (r, g, b, a)
+        return pygame.Color(r, g, b, a=a)
 
     @dataclass
     class CSS3:
