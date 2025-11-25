@@ -1,5 +1,5 @@
 """
-pyggui is a gui library for Pygame. Developed by 5Stygian.
+A gui library for Pygame. Developed by 5Stygian.
 """
 
 import pygame

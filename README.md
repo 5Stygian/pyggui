@@ -1,3 +1,3 @@
-# pyg-gui
+# pyggui
 
 Yet another gui lib for Pygame.
