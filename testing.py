@@ -25,7 +25,7 @@ if __name__ == "__main__":
         screen,
         0, 0,
         300, screenDims["Y"],
-        gui.Colors.rgb(255, 255, 255)
+        pygame.color.Color(255, 255, 255)
     )
 
     button = gui.Menu.Button(
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         screen,
         23, 50,
         90, 60,
-        gui.Colors.rgb(80, 120, 160),
+        pygame.color.Color(80, 120, 160),
         onclick=button1Foo
     )
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
         screen,
         167, 150,
         90, 60,
-        gui.Colors.rgb(170, 120, 160),
+        pygame.color.Color(170, 120, 160),
         onclick=button2Foo
     )
 
