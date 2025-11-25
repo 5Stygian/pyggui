@@ -322,7 +322,7 @@ class Menu(Rect):
 
     def addEventListener(self, mousePos) -> None:
         """
-        Calls the objects onclick function.
+        Calls each child buttons onclick function.
 
         Arguments:
             mousePos (tuple[int, int]): The position of the mouse.
