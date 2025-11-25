@@ -4,8 +4,6 @@ A gui library for Pygame. Developed by 5Stygian :3.
 
 import pygame
 
-from dataclasses import ( dataclass )
-
 class Rect(pygame.sprite.Sprite):
     """
     A class that all pyggui classes inherit from.
