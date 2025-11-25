@@ -15,7 +15,7 @@ class Colors:
     """
 
     @staticmethod
-    def rgb(r: int, g: int, b: int) -> pygame.Color:
+    def rgb(r: int, g: int, b: int) -> pygame.color.Color:
         """
         Syntactic sugar.
 
@@ -25,7 +25,7 @@ class Colors:
             b (int): Blue.
         
         Returns:
-            rgb (pygame.Color): (r, g, b)
+            rgb (pygame.color.Color): (r, g, b)
         """
         
         if type(r) != int:
@@ -43,10 +43,10 @@ class Colors:
         if b < 0 or b > 255:
             raise ValueError(f"b should be in range 0 - 255, not {b}")
 
-        return pygame.Color(r, g, b)
+        return pygame.color.Color(r, g, b)
     
     @staticmethod
-    def rgba(r: int, g: int, b: int, a: int) -> pygame.Color:
+    def rgba(r: int, g: int, b: int, a: int) -> pygame.color.Color:
         """
         Syntactic sugar.
 
@@ -57,7 +57,7 @@ class Colors:
             a (int): Alpha.
         
         Returns:
-            rgba (pygame.Color): (r, g, b, a=a)
+            rgba (pygame.color.Color): (r, g, b, a=a)
         """
         
         if type(r) != int:
@@ -80,7 +80,7 @@ class Colors:
         if a < 0 or a > 255:
             raise ValueError(f"a should be in range 0 - 255, not {a}")
 
-        return pygame.Color(r, g, b, a=a)
+        return pygame.color.Color(r, g, b, a=a)
 
     @dataclass
     class CSS3:
