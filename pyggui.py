@@ -11,7 +11,7 @@ class Rect(pygame.sprite.Sprite):
     Attributes:
         screen (pygame.Surface): A pygame.Surface object.
         
-        background (tuple[int]): An  color value.
+        background (tuple[int, int, int] | pygame.color.Color): A color value.
     """
     
     def __init__(self, screen: pygame.Surface, left: int, top: int, width: int, height: int, background: tuple[int, int, int]|pygame.color.Color):
@@ -24,7 +24,7 @@ class Rect(pygame.sprite.Sprite):
             top (int): The y coord of the top left corner of the sprite.
             width (int): The width of the sprite.
             height (int): The height of the sprite.
-            background (tuple[int, int, int]|pygame.color.Color): A color value.
+            background (tuple[int, int, int] | pygame.color.Color): A color value.
         """
 
         pygame.sprite.Sprite.__init__(self)
@@ -58,7 +58,7 @@ class Menu(Rect):
 
         screen (pygame.Surface): A pygame.Surface object.
         
-        background (tuple[int, int, int]|pygame.color.Color): A color value.
+        background (tuple[int, int, int] | pygame.color.Color): A color value.
     """
 
     def __init__(self, *args):
@@ -74,7 +74,7 @@ class Menu(Rect):
             width (int): The width of the sprite.
             height (int): The height of the sprite.
 
-            background (tuple[int, int, int]|pygame.color.Color): A color value.
+            background (tuple[int, int, int] | pygame.color.Color): A color value.
         """
 
         super().__init__(*args)
@@ -129,7 +129,7 @@ class Menu(Rect):
                 width (int): The width of the sprite.
                 height (int): The height of the sprite.
                 
-                background (tuple[int, int, int]|pygame.color.Color): A color value.
+                background (tuple[int, int, int] | pygame.color.Color): A color value.
             """
 
             super().__init__(*args)
