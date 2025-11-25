@@ -1,5 +1,5 @@
 """
-A gui library for Pygame. Developed by 5Stygian.
+A gui library for Pygame. Developed by 5Stygian :3.
 """
 
 import pygame
