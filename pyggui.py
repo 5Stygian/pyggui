@@ -44,6 +44,43 @@ class Colors:
             raise ValueError(f"b should be in range 0 - 255, not {b}")
 
         return (r, g, b)
+    
+    @staticmethod
+    def rgba(r: int, g: int, b: int, a: int) -> tuple[int, int, int, int]:
+        """
+        Syntactic sugar.
+
+        Args:
+            r (int): Red.
+            g (int): Green.
+            b (int): Blue.
+            a (int): alpha.
+        
+        Returns:
+            rgb (tuple[int, int, int, int]): (r, g, b, a)
+        """
+        
+        if type(r) != int:
+            raise TypeError(f"type of r must be int, not {r.__class__.__name__}")
+        if r < 0 or r > 255:
+            raise ValueError(f"r should be in range 0 - 255, not {r}")
+        
+        if type(g) != int:
+            raise TypeError(f"type of g must be int, not {g.__class__.__name__}")
+        if g < 0 or g > 255:
+            raise ValueError(f"g should be in range 0 - 255, not {g}")
+        
+        if type(b) != int:
+            raise TypeError(f"type of b must be int, not {b.__class__.__name__}")
+        if b < 0 or b > 255:
+            raise ValueError(f"b should be in range 0 - 255, not {b}")
+
+        if type(a) != int:
+            raise TypeError(f"type of a must be int, not {a.__class__.__name__}")
+        if a < 0 or a > 255:
+            raise ValueError(f"a should be in range 0 - 255, not {a}")
+
+        return (r, g, b, a)
 
     @dataclass
     class CSS3:
@@ -199,7 +236,7 @@ class Colors:
 
 class Rect(pygame.sprite.Sprite):
     """
-    A class that all pyggui classes inherit from
+    A class that all pyggui classes inherit from.
 
     Attributes:
         screen (pygame.Surface): A pygame.Surface object.
@@ -283,8 +320,17 @@ class Menu(Rect):
         for sprite in self.sprites:
             sprite.screen.blit(sprite.image, sprite.rect)
 
-    def addEventListener(self) -> None:
-        raise NotImplementedError("Not implemented yet :(")
+    def addEventListener(self, mousePos) -> None:
+        """
+        Calls the objects onclick function.
+
+        Arguments:
+            mousePos (tuple[int, int]): The position of the mouse.
+        """
+
+        for button in self.buttons:
+            if button.onclick is not None and button.rect.contains((*mousePos, 1, 1)):
+                button.onclick()
 
     class Button(Rect):
         """
@@ -330,14 +376,23 @@ class Menu(Rect):
             self.rect.y = self.parent.rect.top + self.rect.top
 
             self.parent.sprites.append(self)
+            self.parent.buttons.append(self)
 
         def centerToParent(self) -> None:
-            """Center the object to the parents center."""
+            """Center the object to the parents centerx"""
 
             self.rect.x = int(self.parent.rect.width/2 - self.rect.width/2)
 
-        def addEventListener(self) -> None:
-            raise NotImplementedError("Not implemented yet :(")
+        def addEventListener(self, mousePos) -> None:
+            """
+            Calls the objects onclick function.
+
+            Arguments:
+                mousePos (tuple[int, int]): The position of the mouse.
+            """
+
+            if self.onclick is not None and self.rect.contains((*mousePos, 1, 1)):
+                self.onclick()
 
 if __name__ == "__main__":
     class FuckYouException(Exception):

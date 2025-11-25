@@ -15,6 +15,12 @@ if __name__ == "__main__":
         "Y": screen.get_height()
     }
 
+    def button1Foo():
+        print("button1 click")
+
+    def button2Foo():
+        print("button2 click")
+
     menu = gui.Menu(
         screen,
         0, 0,
@@ -27,7 +33,8 @@ if __name__ == "__main__":
         screen,
         23, 50,
         90, 60,
-        gui.Colors.rgb(80, 120, 160)
+        gui.Colors.rgb(80, 120, 160),
+        onclick=button1Foo
     )
 
     button2 = gui.Menu.Button(
@@ -35,14 +42,19 @@ if __name__ == "__main__":
         screen,
         167, 150,
         90, 60,
-        gui.Colors.rgb(80, 120, 160)
+        gui.Colors.rgb(170, 120, 160),
+        onclick=button2Foo
     )
 
     button.centerToParent()
     button2.centerToParent()
 
     while running:
+        mousePos = pygame.mouse.get_pos()
         for event in pygame.event.get():
+            if pygame.mouse.get_pressed()[0]:
+                menu.addEventListener(mousePos)
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 raise SystemExit
