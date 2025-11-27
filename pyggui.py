@@ -4,6 +4,231 @@ A gui library for Pygame. Developed by 5Stygian :3.
 
 import pygame
 
+from dataclasses import dataclass
+
+class Color:
+    """A class containing colors and color related methods. All members are static, so you don't need to create an object to access them."""
+
+    @staticmethod
+    def rgb(r: int, g: int, b: int) -> pygame.color.Color:
+        """
+        Syntactic sugar.
+
+        Args:
+            r (int): The red component of a rgb color.
+            g (int): The green component of a rgb color.
+            b (int): The blue component of a rgb color.
+
+        Returns:
+            (r, g, b) (pygame.color.Color): A pygame.color.Color object.
+        """
+
+        if type(r) != int:
+            raise TypeError(f"type of r should be int, not {r.__class__.__name__}")
+        if r < 0 or r > 255:
+            raise ValueError(f"r should be in range 0 - 255, not {r}")
+
+        if type(g) != int:
+            raise TypeError(f"type of g should be int, not {g.__class__.__name__}")
+        if g < 0 or g > 255:
+            raise ValueError(f"g should be in range 0 - 255, not {g}")
+
+        if type(b) != int:
+            raise TypeError(f"type of b should be int, not {b.__class__.__name__}")
+        if b < 0 or b > 255:
+            raise ValueError(f"b should be in range 0 - 255, not {b}")
+
+        return pygame.color.Color(r, g, b)
+
+    @staticmethod
+    def rgba(r: int, g: int, b: int, a: int) -> pygame.color.Color:
+        """
+        Syntactic sugar.
+
+        Args:
+            r (int): The red component of a rgba color.
+            g (int): The green component of a rgba color.
+            b (int): The blue component of a rgba color.
+            b (int): The alpha component of a rgba color.
+
+        Returns:
+            (r, g, b, a) (pygame.color.Color): A pygame.color.Color object.
+        """
+
+        if type(r) != int:
+            raise TypeError(f"type of r should be int, not {r.__class__.__name__}")
+        if r < 0 or r > 255:
+            raise ValueError(f"r should be in range 0 - 255, not {r}")
+
+        if type(g) != int:
+            raise TypeError(f"type of g should be int, not {g.__class__.__name__}")
+        if g < 0 or g > 255:
+            raise ValueError(f"g should be in range 0 - 255, not {g}")
+
+        if type(b) != int:
+            raise TypeError(f"type of b should be int, not {b.__class__.__name__}")
+        if b < 0 or b > 255:
+            raise ValueError(f"b should be in range 0 - 255, not {b}")
+
+        if type(a) != int:
+            raise TypeError(f"type of a should be int, not {a.__class__.__name__}")
+        if a < 0 or a > 255:
+            raise ValueError(f"a should be in range 0 - 255, not {a}")
+
+        return pygame.color.Color(r, g, b, a=a)
+
+    @dataclass
+    class CSS3:
+        """A dataclass containing all CSS3 colors."""
+
+        aliceblue            = pygame.color.Color(240, 248, 255)
+        antiquewhite         = pygame.color.Color(250, 235, 215)
+        aqua                 = pygame.color.Color(0, 255, 255)
+        aquamarine           = pygame.color.Color(127, 255, 212)
+        azure                = pygame.color.Color(240, 255, 255)
+        beige                = pygame.color.Color(245, 245, 220)
+        bisque               = pygame.color.Color(255, 228, 196)
+        black                = pygame.color.Color(0, 0, 0)
+        blanchedalmond       = pygame.color.Color(255, 235, 205)
+        blue                 = pygame.color.Color(0, 0, 255)
+        blueviolet           = pygame.color.Color(138, 43, 226)
+        brown                = pygame.color.Color(165, 42, 42)
+        burlywood            = pygame.color.Color(222, 184, 135)
+        cadetblue            = pygame.color.Color(95, 158, 160)
+        chartreuse           = pygame.color.Color(127, 255, 0)
+        chocolate            = pygame.color.Color(210, 105, 30)
+        coral                = pygame.color.Color(255, 127, 80)
+        cornsilk             = pygame.color.Color(255, 248, 220)
+        cornflowerblue       = pygame.color.Color(100, 149, 237)
+        crimson              = pygame.color.Color(220, 20, 60)
+        cyan                 = pygame.color.Color(0, 255, 255)
+        darkblue             = pygame.color.Color(0, 0, 139)
+        darkcyan             = pygame.color.Color(0, 139, 139)
+        darkgoldenrod        = pygame.color.Color(184, 134, 11)
+        darkgray             = pygame.color.Color(169, 169, 169)
+        darkgreen            = pygame.color.Color(0, 100, 0)
+        darkgrey             = pygame.color.Color(169, 169, 169)
+        darkkhaki            = pygame.color.Color(189, 183, 107)
+        darkmagenta          = pygame.color.Color(139, 0, 139)
+        darkolivegreen       = pygame.color.Color(85, 107, 47)
+        darkorange           = pygame.color.Color(255, 140, 0)
+        darkorchid           = pygame.color.Color(153, 50, 204)
+        darkred              = pygame.color.Color(139, 0, 0)
+        darksalmon           = pygame.color.Color(233, 150, 122)
+        darkseagreen         = pygame.color.Color(143, 188, 143)
+        darkslateblue        = pygame.color.Color(72, 61, 139)
+        darkslategray        = pygame.color.Color(47, 79, 79)
+        darkslategrey        = pygame.color.Color(47, 79, 79)
+        darkturquoise        = pygame.color.Color(0, 206, 209)
+        darkviolet           = pygame.color.Color(148, 0, 211)
+        deeppink             = pygame.color.Color(255, 20, 147)
+        deepskyblue          = pygame.color.Color(0, 191, 255)
+        dimgray              = pygame.color.Color(105, 105, 105)
+        dimgrey              = pygame.color.Color(105, 105, 105)
+        dodgerblue           = pygame.color.Color(30, 144, 255)
+        firebrick            = pygame.color.Color(178, 34, 34)
+        floralwhite          = pygame.color.Color(255, 250, 240)
+        forestgreen          = pygame.color.Color(34, 139, 34)
+        fuchsia              = pygame.color.Color(255, 0, 255)
+        gainsboro            = pygame.color.Color(220, 220, 220)
+        ghostwhite           = pygame.color.Color(248, 248, 255)
+        gold                 = pygame.color.Color(255, 215, 0)
+        goldenrod            = pygame.color.Color(218, 165, 32)
+        gray                 = pygame.color.Color(128, 128, 128)
+        green                = pygame.color.Color(0, 128, 0)
+        greenyellow          = pygame.color.Color(173, 255, 47)
+        grey                 = pygame.color.Color(128, 128, 128)
+        honeydew             = pygame.color.Color(240, 255, 240)
+        hotpink              = pygame.color.Color(255, 105, 180)
+        indianred            = pygame.color.Color(205, 92, 92)
+        indigo               = pygame.color.Color(75, 0, 130)
+        ivory                = pygame.color.Color(255, 255, 240)
+        khaki                = pygame.color.Color(240, 230, 140)
+        lavender             = pygame.color.Color(230, 230, 250)
+        lavenderblush        = pygame.color.Color(255, 240, 245)
+        lawngreen            = pygame.color.Color(124, 252, 0)
+        lemonchiffon         = pygame.color.Color(255, 250, 205)
+        lightblue            = pygame.color.Color(173, 216, 230)
+        lightcoral           = pygame.color.Color(240, 128, 128)
+        lightcyan            = pygame.color.Color(224, 255, 255)
+        lightgoldenrodyellow = pygame.color.Color(250, 250, 210)
+        lightgray            = pygame.color.Color(211, 211, 211)
+        lightgreen           = pygame.color.Color(144, 238, 144)
+        lightgrey            = pygame.color.Color(211, 211, 211)
+        lightpink            = pygame.color.Color(255, 182, 193)
+        lightsalmon          = pygame.color.Color(255, 160, 122)
+        lightseagreen        = pygame.color.Color(32, 178, 170)
+        lightskyblue         = pygame.color.Color(135, 206, 250)
+        lightslategray       = pygame.color.Color(119, 136, 153)
+        lightslategrey       = pygame.color.Color(119, 136, 153)
+        lightsteelblue       = pygame.color.Color(176, 196, 222)
+        lightyellow          = pygame.color.Color(255, 255, 224)
+        lime                 = pygame.color.Color(0, 255, 0)
+        limegreen            = pygame.color.Color(50, 205, 50)
+        linen                = pygame.color.Color(250, 240, 230)
+        magenta              = pygame.color.Color(255, 0, 255)
+        maroon               = pygame.color.Color(128, 0, 0)
+        mediumaquamarine     = pygame.color.Color(102, 205, 170)
+        mediumblue           = pygame.color.Color(0, 0, 205)
+        mediumorchid         = pygame.color.Color(186, 85, 211)
+        mediumpurple         = pygame.color.Color(147, 112, 216)
+        mediumseagreen       = pygame.color.Color(60, 179, 113)
+        mediumslateblue      = pygame.color.Color(123, 104, 238)
+        mediumspringgreen    = pygame.color.Color(0, 250, 154)
+        mediumturquoise      = pygame.color.Color(72, 209, 204)
+        mediumvioletred      = pygame.color.Color(199, 21, 133)
+        midnightblue         = pygame.color.Color(25, 25, 112)
+        mintcream            = pygame.color.Color(245, 255, 250)
+        mistyrose            = pygame.color.Color(255, 228, 225)
+        moccasin             = pygame.color.Color(255, 228, 181)
+        navajowhite          = pygame.color.Color(255, 222, 173)
+        navy                 = pygame.color.Color(0, 0, 128)
+        oldlace              = pygame.color.Color(253, 245, 230)
+        olive                = pygame.color.Color(128, 128, 0)
+        olivedrab            = pygame.color.Color(107, 142, 35)
+        orange               = pygame.color.Color(255, 165, 0)
+        orangered            = pygame.color.Color(255, 69, 0)
+        orchid               = pygame.color.Color(218, 112, 214)
+        palegoldenrod        = pygame.color.Color(238, 232, 170)
+        palegreen            = pygame.color.Color(152, 251, 152)
+        paleturquoise        = pygame.color.Color(175, 238, 238)
+        palevioletred        = pygame.color.Color(216, 112, 147)
+        papayawhip           = pygame.color.Color(255, 239, 213)
+        peachpuff            = pygame.color.Color(255, 218, 185)
+        peru                 = pygame.color.Color(205, 133, 63)
+        pink                 = pygame.color.Color(255, 192, 203)
+        plum                 = pygame.color.Color(221, 160, 221)
+        powderblue           = pygame.color.Color(176, 224, 230)
+        purple               = pygame.color.Color(128, 0, 128)
+        red                  = pygame.color.Color(255, 0, 0)
+        rosybrown            = pygame.color.Color(188, 143, 143)
+        royalblue            = pygame.color.Color(65, 105, 225)
+        saddlebrown          = pygame.color.Color(139, 69, 19)
+        salmon               = pygame.color.Color(250, 128, 114)
+        sandybrown           = pygame.color.Color(244, 164, 96)
+        seagreen             = pygame.color.Color(46, 139, 87)
+        seashell             = pygame.color.Color(255, 245, 238)
+        sienna               = pygame.color.Color(160, 82, 45)
+        silver               = pygame.color.Color(192, 192, 192)
+        skyblue              = pygame.color.Color(135, 206, 235)
+        slateblue            = pygame.color.Color(106, 90, 205)
+        slategray            = pygame.color.Color(112, 128, 144)
+        slategrey            = pygame.color.Color(112, 128, 144)
+        snow                 = pygame.color.Color(255, 250, 250)
+        springgreen          = pygame.color.Color(0, 255, 127)
+        steelblue            = pygame.color.Color(70, 130, 180)
+        tan                  = pygame.color.Color(210, 180, 140)
+        teal                 = pygame.color.Color(0, 128, 128)
+        thistle              = pygame.color.Color(216, 191, 216)
+        tomato               = pygame.color.Color(255, 99, 71)
+        turquoise            = pygame.color.Color(64, 224, 208)
+        violet               = pygame.color.Color(238, 130, 238)
+        wheat                = pygame.color.Color(245, 222, 179)
+        white                = pygame.color.Color(255, 255, 255)
+        whitesmoke           = pygame.color.Color(245, 245, 245)
+        yellow               = pygame.color.Color(255, 255, 0)
+        yellowgreen          = pygame.color.Color(154, 205, 50)
+
 class Rect(pygame.sprite.Sprite):
     """
     A class that rect-like pyggui classes inherit from. Can also be used on its own.

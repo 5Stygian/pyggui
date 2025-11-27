@@ -36,13 +36,13 @@ if __name__ == "__main__":
         screen,
         100, 0,
         300, ScreenDims.height,
-        pygame.color.Color(255, 255, 255)
+        gui.Color.rgba(40, 20, 70, 155)
     )
 
     button = gui.Menu.Button(
         menu,
         screen,
-        0, 0,
+        0, 40,
         200, 60,
         (170, 70, 120),
         onclick=lambda x="1": print(x)
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         0, 0,
         "TEST",
         font,
-        (0, 0, 0)
+        gui.Color.CSS3.white
     )
     menuLabel.centerToParent()
 
@@ -64,13 +64,11 @@ if __name__ == "__main__":
         ScreenDims.centerx, ScreenDims.centery,
         "Hello!",
         font,
-        (0,0,0)
+        gui.Color.CSS3.darkgreen
     )
 
     rect.centerToWindow(screen)
     label.centerToWindow(screen)
-
-    print(type(menu))
 
     while running:
         mousePos = pygame.mouse.get_pos()
