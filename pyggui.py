@@ -49,7 +49,7 @@ class Color:
             r (int): The red component of a rgba color.
             g (int): The green component of a rgba color.
             b (int): The blue component of a rgba color.
-            b (int): The alpha component of a rgba color.
+            a (int): The alpha component of a rgba color.
 
         Returns:
             (r, g, b, a) (pygame.color.Color): A pygame.color.Color object.
