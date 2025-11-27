@@ -1,6 +1,10 @@
+"""A testing file for development."""
+
 if __name__ == "__main__":
     import pygame
     import pyggui as gui
+
+    from collections import namedtuple
 
     pygame.init()
 
@@ -10,44 +14,54 @@ if __name__ == "__main__":
     dt = 0
 
     screen = pygame.display.set_mode((1280, 720))
-    screenDims = {
-        "X": screen.get_width(), 
-        "Y": screen.get_height()
-    }
+    ScreenDimensions = namedtuple("ScreenDimensions", ('width', 'height', 'center', 'centerx', 'centery'))
+    ScreenDims = ScreenDimensions(
+        int(screen.get_width()),
+        int(screen.get_height()),
+        (int(screen.get_width() / 2), int(screen.get_height() / 2)),
+        int(screen.get_width() / 2),
+        int(screen.get_height() / 2),
+    )
 
-    def button1Foo():
-        print("button1 click")
+    font = pygame.font.Font("Rubik\Rubik-VariableFont_wght.ttf", size=24)
 
-    def button2Foo():
-        print("button2 click")
+    rect = gui.Rect(
+        screen,
+        0, 0,
+        100, 100,
+        (255,255,255)
+    )
 
     menu = gui.Menu(
         screen,
-        0, 0,
-        300, screenDims["Y"],
+        100, 0,
+        300, ScreenDims.height,
         pygame.color.Color(255, 255, 255)
     )
 
     button = gui.Menu.Button(
         menu,
         screen,
-        23, 50,
-        90, 60,
-        pygame.color.Color(80, 120, 160),
-        onclick=button1Foo
+        0, 0,
+        200, 60,
+        (170, 70, 120),
+        onclick=lambda x="1": print(x)
     )
+    button.centerToParent()
 
-    button2 = gui.Menu.Button(
+    menuLabel = gui.Menu.Label(
         menu,
         screen,
-        167, 150,
-        90, 60,
-        pygame.color.Color(170, 120, 160),
-        onclick=button2Foo
+        0, 0,
+        "TEST",
+        font,
+        (0, 0, 0)
     )
+    menuLabel.centerToParent()
 
-    button.centerToParent()
-    button2.centerToParent()
+    rect.centerToWindow(screen)
+
+    print(type(menu))
 
     while running:
         mousePos = pygame.mouse.get_pos()
@@ -58,10 +72,11 @@ if __name__ == "__main__":
             if event.type == pygame.QUIT:
                 pygame.quit()
                 raise SystemExit
-        
+
         screen.fill("black")
 
-        menu.draw()
+        rect.draw()
+        menu.drawAll()
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000
@@ -70,7 +85,7 @@ else:
         def __init__(self, message):
             super().__init__(message)
             self.message = message
-        
+
         def __repr__(self) -> str:
             return super().__repr__()
 
