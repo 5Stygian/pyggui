@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     rect = gui.Rect(
         screen,
-        0, 0,
+        ScreenDims.centerx, ScreenDims.centery,
         100, 100,
         (255,255,255)
     )
@@ -59,7 +59,16 @@ if __name__ == "__main__":
     )
     menuLabel.centerToParent()
 
+    label = gui.Label(
+        screen,
+        ScreenDims.centerx, ScreenDims.centery,
+        "Hello!",
+        font,
+        (0,0,0)
+    )
+
     rect.centerToWindow(screen)
+    label.centerToWindow(screen)
 
     print(type(menu))
 
@@ -76,6 +85,7 @@ if __name__ == "__main__":
         screen.fill("black")
 
         rect.draw()
+        label.draw()
         menu.drawAll()
 
         pygame.display.flip()
