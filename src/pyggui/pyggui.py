@@ -251,6 +251,9 @@ class Rect(pygame.sprite.Sprite):
 
         fill (tuple[int, int, int] | pygame.color.Color): A color value.
 
+        left (int): The x coord of the top left corner of the sprite.
+        top (int): The y coord of the top left corner of the sprite.
+
         image (pygame.surface.Surface): The image of the object.
         rect (pygame.rect.Rect): The rect of the object.
     """
@@ -375,6 +378,9 @@ class Menu(Rect):
 
         fill (tuple[int, int, int] | pygame.color.Color): A color value.
 
+        left (int): The x coord of the top left corner of the sprite.
+        top (int): The y coord of the top left corner of the sprite.
+
         image (pygame.surface.Surface): The image of the object.
         rect (pygame.rect.Rect): The rect of the object.
 
@@ -479,10 +485,10 @@ class Menu(Rect):
             parent (Menu): A Menu object.
             onclick (callable): A function.
 
+            fill (tuple[int, int, int] | pygame.color.Color): The color of the background.
+
             left (int): The x coord of the top left corner of the sprite.
             top (int): The y coord of the top left corner of the sprite.
-
-            fill (tuple[int, int, int] | pygame.color.Color): The color of the background.
 
             screen (pygame.surface.Surface): A pygame.surface.Surface object.
         """
