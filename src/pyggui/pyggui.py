@@ -6,6 +6,19 @@ import pygame
 
 from dataclasses import dataclass
 
+class _Child:
+    """An internal class used by pyggui. Do not use this class."""
+
+    def __init__(self, parent):
+        self.parent = parent
+        if type(self.parent) != Menu:
+            raise TypeError(f"type of parent must be Menu, not {self.parent.__class__.__name__}")
+
+        self.rect.x = self.parent.rect.x + self.left
+        self.rect.y = self.parent.rect.y + self.top
+
+        self.parent.sprites.add(self)
+
 class Color:
     """A class containing colors and color related methods. All members are static, so you don't need to create an object to access them."""
 
@@ -260,6 +273,9 @@ class Rect(pygame.sprite.Sprite):
 
         self.screen = screen
 
+        self.left = left
+        self.top = top
+
         self.fill = fill
 
         self.image = pygame.surface.Surface([width, height])
@@ -405,7 +421,7 @@ class Menu(Rect):
         """
         Calls each child buttons onclick function.
 
-        Arguments:
+        Args:
             mousePos (tuple[int, int]): The position of the mouse.
         """
 
@@ -413,7 +429,7 @@ class Menu(Rect):
             if button.onclick is not None and button.rect.contains((*mousePos, 1, 1)):
                 button.onclick()
 
-    class Label(Label):
+    class Label(_Child, Label):
         """
         A class that can draw text. Aligned to a parent Menu.
 
@@ -446,13 +462,8 @@ class Menu(Rect):
             """
 
             Label.__init__(self, *args)
+            _Child.__init__(self, parent)
 
-            self.parent = parent
-
-            self.rect.x = self.parent.rect.left + self.rect.left
-            self.rect.y = self.parent.rect.top + self.rect.top
-
-            self.parent.sprites.add(self)
             self.parent.labels.add(self)
 
         def centerToParent(self) -> None:
@@ -460,7 +471,7 @@ class Menu(Rect):
 
             self.rect.centerx = self.parent.rect.centerx
 
-    class Button(Rect):
+    class Button(_Child, Rect):
         """
         Renders a button to the screen.
 
@@ -474,7 +485,7 @@ class Menu(Rect):
         def __init__(self, parent, *args,
                      onclick = None):
             """
-            Class Constructor.
+            Class constructor.
 
             Args:
                 parent (Menu): A Menu object.
@@ -493,20 +504,13 @@ class Menu(Rect):
                 onclick (callable): A function.
             """
 
-            super().__init__(*args)
-
-            self.parent = parent
-            if type(self.parent) != Menu:
-                raise TypeError(f"type of parent must be Menu, not {self.parent.__class__.__name__}")
+            Rect.__init__(self, *args)
+            _Child.__init__(self, parent)
 
             self.onclick = onclick
             if self.onclick is not None and not callable(onclick):
                 raise TypeError(f"type of onclick must be callable, not {self.onclick.__class__.__name__}")
 
-            self.rect.x = self.parent.rect.left + self.rect.left
-            self.rect.y = self.parent.rect.top + self.rect.top
-
-            self.parent.sprites.add(self)
             self.parent.buttons.add(self)
 
         def centerToParent(self) -> None:
@@ -518,7 +522,7 @@ class Menu(Rect):
             """
             Calls the objects onclick function.
 
-            Arguments:
+            Args:
                 mousePos (tuple[int, int]): The position of the mouse.
             """
 

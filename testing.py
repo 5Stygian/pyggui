@@ -2,7 +2,7 @@
 
 if __name__ == "__main__":
     import pygame
-    import pyggui as gui
+    from src.pyggui import pyggui as gui
 
     from collections import namedtuple
 
@@ -20,10 +20,10 @@ if __name__ == "__main__":
         int(screen.get_height()),
         (int(screen.get_width() / 2), int(screen.get_height() / 2)),
         int(screen.get_width() / 2),
-        int(screen.get_height() / 2),
+        int(screen.get_height() / 2)
     )
 
-    font = pygame.font.Font("Rubik\Rubik-VariableFont_wght.ttf", size=24)
+    font = pygame.font.Font("Rubik\\Rubik-VariableFont_wght.ttf", size=24)
 
     rect = gui.Rect(
         screen,
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     menu = gui.Menu(
         screen,
-        100, 0,
+        200, 0,
         300, ScreenDims.height,
         gui.Color.rgba(40, 20, 70, 155)
     )
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         0, 40,
         200, 60,
         (170, 70, 120),
-        onclick=lambda x="1": print(x)
+        onclick=lambda x=1: print(x)
     )
     button.centerToParent()
 
