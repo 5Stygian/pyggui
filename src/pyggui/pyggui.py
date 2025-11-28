@@ -479,6 +479,11 @@ class Menu(Rect):
             parent (Menu): A Menu object.
             onclick (callable): A function.
 
+            left (int): The x coord of the top left corner of the sprite.
+            top (int): The y coord of the top left corner of the sprite.
+
+            fill (tuple[int, int, int] | pygame.color.Color): The color of the background.
+
             screen (pygame.surface.Surface): A pygame.surface.Surface object.
         """
 
