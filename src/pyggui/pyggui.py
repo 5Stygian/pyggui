@@ -6,18 +6,26 @@ import pygame
 
 from dataclasses import dataclass
 
+from pygame.sysfont import font_constructor
+
+
 class _Child:
     """An internal class used by pyggui. Do not use this class."""
 
     def __init__(self, parent):
         self.parent = parent
-        if type(self.parent) != Menu:
+        if type(self) == Menu.Label and type(self.parent) == Menu.Button:
+            pass
+        elif type(self.parent) != Menu:
             raise TypeError(f"type of parent must be Menu, not {self.parent.__class__.__name__}")
 
         self.rect.x = self.parent.rect.x + self.left
         self.rect.y = self.parent.rect.y + self.top
 
-        self.parent.sprites.add(self)
+        if type(self.parent) == Menu:
+            self.parent.sprites.add(self)
+        else:
+            pass
 
 class Color:
     """A class containing colors and color related methods. All members are static, so you don't need to create an object to access them."""
@@ -323,7 +331,7 @@ class Label(pygame.sprite.Sprite):
     """
 
     def __init__(self, screen: pygame.surface.Surface, left: int, top: int, text: str, font: pygame.font.Font,
-                 color: tuple[int, int, int] | pygame.color.Color):
+                 color: tuple[int, int, int] | pygame.color.Color,):
         """
         Class constructor.
 
@@ -422,6 +430,8 @@ class Menu(Rect):
         self.draw()
         for sprite in self.sprites:
             sprite.draw()
+            if type(sprite) == Menu.Button:
+                sprite.label.draw()
 
     def addEventListener(self, mousePos: tuple[int, int]) -> None:
         """
@@ -494,7 +504,7 @@ class Menu(Rect):
         """
 
         def __init__(self, parent, *args,
-                     onclick = None):
+                     onclick = None, text: str = "", font: pygame.font.Font = pygame.font.get_default_font(), textColor: tuple[int, int, int]|pygame.color.Color = Color.CSS3.white):
             """
             Class constructor.
 
@@ -521,6 +531,29 @@ class Menu(Rect):
             self.onclick = onclick
             if self.onclick is not None and not callable(onclick):
                 raise TypeError(f"type of onclick must be callable, not {self.onclick.__class__.__name__}")
+
+            # text
+            self.text = text
+            self.font = font
+            self.textColor = textColor
+
+            if self.font is None or type(self.font) != pygame.font.Font:
+                raise TypeError(f"type of font should be pygame.font.Font, not {self.font.__class__.__name__}")
+            else:
+                self.labels = pygame.sprite.Group()
+
+                self.label = Menu.Label(
+                    self,
+                    self.screen,
+                    0, 0,
+                    self.text,
+                    self.font,
+                    self.textColor
+                )
+
+                self.label.rect.center = self.rect.center
+
+                self.label.draw()
 
             self.parent.buttons.add(self)
 

@@ -44,10 +44,13 @@ if __name__ == "__main__":
         screen,
         0, 40,
         200, 60,
-        (170, 70, 120),
-        onclick=lambda x=1: print(x)
+        gui.Color.rgb(170, 70, 120),
+        onclick=lambda x=1: print(x),
+        text="This is a button",
+        font=font
     )
     button.centerToParent()
+    print(button.rect.center, button.label.rect.center)
 
     menuLabel = gui.Menu.Label(
         menu,
