@@ -558,9 +558,11 @@ class Menu(Rect):
             self.parent.buttons.add(self)
 
         def centerToParent(self) -> None:
-            """Center the object to the parents centerx."""
+            """Center the object to its parents centerx."""
 
             self.rect.centerx = self.parent.rect.centerx
+            if self.label:
+                self.label.rect.centerx = self.label.parent.rect.centerx
 
         def addEventListener(self, mousePos: tuple[int, int]) -> None:
             """

@@ -50,7 +50,6 @@ if __name__ == "__main__":
         font=font
     )
     button.centerToParent()
-    print(button.rect.center, button.label.rect.center)
 
     menuLabel = gui.Menu.Label(
         menu,
