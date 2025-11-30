@@ -39,18 +39,6 @@ if __name__ == "__main__":
         gui.Color.rgba(40, 20, 70, 155)
     )
 
-    button = gui.Menu.Button(
-        menu,
-        screen,
-        0, 40,
-        200, 60,
-        gui.Color.rgb(170, 70, 120),
-        onclick=lambda x=1: print(x),
-        text="This is a button",
-        font=font
-    )
-    button.centerToParent()
-
     menuLabel = gui.Menu.Label(
         menu,
         screen,
@@ -71,6 +59,26 @@ if __name__ == "__main__":
 
     rect.centerToWindow(screen)
     label.centerToWindow(screen)
+
+    x = 0
+    def buttonFoo():
+        global x
+
+        label.text = str(x)
+        label.update()
+        x += 1
+
+    button = gui.Menu.Button(
+        menu,
+        screen,
+        0, 40,
+        200, 60,
+        gui.Color.rgb(170, 70, 120),
+        onclick=buttonFoo,
+        text="This is a button",
+        font=font
+    )
+    button.centerToParent()
 
     while running:
         mousePos = pygame.mouse.get_pos()

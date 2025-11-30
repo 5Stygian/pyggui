@@ -366,6 +366,10 @@ class Label(pygame.sprite.Sprite):
 
         self.screen.blit(self.image, self.rect)
 
+    def update(self) -> None:
+        self.font.render(self.text, True, self.color)
+        self.screen.blit(self.image, self.rect)
+
     def centerToWindow(self, screen: pygame.surface.Surface) -> None:
         """
         Center the object to the center of the main window.
